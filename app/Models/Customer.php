@@ -19,7 +19,12 @@ class Customer extends Model
 
     public function subscriptions(): HasMany
     {
-        return $this->hasMany(Subscription::class, 'customers_id', 'íd');
+        return $this->hasMany(Subscription::class, 'customers_id', 'id');
+    }
+
+    public function sub(): HasMany
+    {
+        return $this->hasMany(Subscription::class, 'customers_id', 'id');
     }
 
     public function cars(): HasMany

@@ -17,37 +17,39 @@ class SubscriptionController extends Controller
 
 
 
-        public function create(Customer $customer)
-        {
+    public function create(Customer $customer)
+    {
 
-            $subscriptionTypes = SubscriptionType::all();
-            // $customer = Customer::all();
-            return view('subscription.create', compact('subscriptionTypes', 'customer'));
-        }
+        $subscriptionTypes = SubscriptionType::all();
+        // $customer = Customer::all();
+        return view('subscription.create', compact('subscriptionTypes', 'customer'));
+    }
 
-        public function customersubscription(Customer $customer)
+    public function customersubscription(Customer $customer)
     {
         //
+        $subscriptionTypes = SubscriptionType::all();
         return view('subscription.create')
+            ->with('subscriptionTypes', $subscriptionTypes)
             ->with('customer', $customer);
     }
 
 
-        public function store(Request $request, Customer $customer)
-        {
+    public function store(Request $request, Customer $customer)
+    {
 
-            $request->validate([
-                'subscription_types_id' => 'required|exists:subscription_types,id',
-                'customers_id' => 'required|exists:customers,id',
-                'number_of_wash' => 'required|integer',
-                'start_date' => 'required|date',
-                'end_date' => 'required|date|after_or_equal:start_date',
-            ]);
+        $request->validate([
+            'subscription_types_id' => 'required|exists:subscription_types,id',
+            'customers_id' => 'required|exists:customers,id',
+            'number_of_wash' => 'required|integer',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
 
-            $newSubscription= subscription:: create($request->all());
+        $newSubscription = subscription::create($request->all());
 
-            return redirect()->route('subscription.create', ['customer'=>$customer])->with('success', 'Subscription created successfully.');
-        }
+        return redirect()->route('customer.view', ['customer' => $customer])->with('success', 'Subscription created successfully.');
+    }
 
     public function show($id)
     {

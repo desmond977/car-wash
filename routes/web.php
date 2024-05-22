@@ -65,7 +65,7 @@ Route::delete('/subscription_type/{subscription_type}/delete', [SubscriptionType
 
 
 
-Route::get('/subscription/{customer}/subscription', [CarController::class, 'customersubscription'])->name('subscription.customersubscription');
+Route::get('/subscription/{customer}/subscription', [SubscriptionController::class, 'customersubscription'])->name('subscription.customersubscription');
 Route::get('/customers/{customer}/subscription/create', [SubscriptionController::class, 'create'])->name('subscription.create');
 Route::post('/customers/{customer}/subscription', [SubscriptionController::class, 'store'])->name('subscription.store');
 // Route::get('/subscription/{subscription}/edit', [SubscriptionController::class, 'edit'])->name('subscription.edit');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Http\Requests\CustomerUpdateRequest;
+use App\Models\Subscription;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -85,9 +86,11 @@ class CustomerController extends Controller
     public function view($id)
     {
         // return $id;
-        $customer = Customer::with(['subscriptions', 'cars'])
+        $customer = Customer::with(['subscriptions.subscriptionType', 'cars', 'sub'])
             ->where('id', $id)->first();
-        return $customer;
+        // $subscriptions = Subscription::where('customers_id', $id)->get();
+        // return $subscriptions;
+        // return $customer;
         return view('customer.view')->with('customer', $customer);
 
     }
