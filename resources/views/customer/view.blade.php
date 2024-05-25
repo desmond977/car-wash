@@ -22,7 +22,7 @@
                 </div>
 
                 <h2 class="text-2xl font-semibold mb-4">Subscriptions</h2>
-                <a href="{{ route('subscription.customersubscription', $customer->id) }}"
+                <a href="{{ route('subscription.create', $customer->id) }}"
                     class="mb-4 inline-block px-4 py-2 bg-blue-600 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Add
                     Subscription</a>
 
@@ -48,9 +48,9 @@
                                         <p class="text-gray-700"><strong>End Date:</strong>
                                             {{ $subscription->end_date }}</p>
                                         <div class="flex space-x-2 mt-2">
-                                            <a href="{{ route('subscription.edit', $subscription->id) }}"
+                                            <a href=""
                                                 class="px-4 py-2 bg-gray-600 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out">Edit</a>
-                                            <form action="{{ route('subscription.destroy', $subscription->id) }}"
+                                            <form action=""
                                                 method="POST" class="inline-block">
                                                 @csrf
                                                 @method('DELETE')

@@ -17,9 +17,9 @@ class SubscriptionType extends Model
     ];
 
      // Define relationships
-     public function subscription()
+     public function subscriptions()
      {
-         return $this->hasMany(Subscription::class, 'subscriptionType_id');
+         return $this->hasMany(Subscription::class, 'subscription_types_id');
      }
 
      // Helper methods

@@ -13,6 +13,13 @@ class SubscriptionController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function index()
+    {
+        //
+        $customer = Customer::all();
+    return view('subscription.index', ['customer'=> $customer]);
+
+    }
 
 
 
@@ -46,7 +53,7 @@ class SubscriptionController extends Controller
 
             $newSubscription= subscription:: create($request->all());
 
-            return redirect()->route('subscription.create', ['customer'=>$customer])->with('success', 'Subscription created successfully.');
+            return redirect()->route('customer.view', ['customer'=>$customer])->with('success', 'Subscription created successfully.');
         }
 
     public function show($id)

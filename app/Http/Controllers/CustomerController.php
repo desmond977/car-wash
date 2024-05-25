@@ -82,13 +82,31 @@ class CustomerController extends Controller
     return redirect()->route('customer.index')->with('success', 'Customer deleted successfully');
     }
 
+    // public function view($id)
+    // {
+    //     // return $id;
+    //     $testCustomer= DB::table('customers')
+    //     ->join('subs')
+    //     $customer = Customer::with(['subscriptions', 'cars'])
+    //         ->where('id', $id)->first();
+    //     return $customer;
+    //     return view('customer.view')->with('customer', $customer);
+
+    // }
     public function view($id)
     {
-        // return $id;
-        $customer = Customer::with(['subscriptions', 'cars'])
-            ->where('id', $id)->first();
-        return $customer;
-        return view('customer.view')->with('customer', $customer);
+        // Fetch the customer with their subscriptions and cars
+        $customer = Customer::with(['subscriptions.subscriptionType', 'cars'])->findOrFail($id);
 
+        if ($customer->subscriptions->isEmpty()) {
+            dd('No subscriptions found', $customer->subscriptions);
+        } else {
+            dd('Subscriptions found', $customer->subscriptions);
+        }
+
+        // return view('customer.view', compact('customer'));
+        // Pass the customer to the view
+        // return view('customer.view')->with('customer', $customer);
     }
+
 }

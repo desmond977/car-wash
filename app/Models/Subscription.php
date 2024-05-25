@@ -19,7 +19,7 @@ class Subscription extends Model
 
     public function subscriptionType()
     {
-        return $this->belongsTo(SubscriptionType::class, 'subscriptionTypes_id', 'id');
+        return $this->belongsTo(SubscriptionType::class, 'subscriptiontypes_id', 'id');
     }
 
     public function customer()
@@ -40,7 +40,7 @@ class Subscription extends Model
 
 //Validation Rules:
 public static $rules = [
-    'subscriptiontypes_id' => 'required|exists:subscription_types,id',
+    'subscription_types_id' => 'required|exists:subscription_types,id',
     'customers_id' => 'required|exists:customers,id',
     'number_of_wash' => 'required|integer|min:0',
     'start_date' => 'required|date',
