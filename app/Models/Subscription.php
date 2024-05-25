@@ -19,7 +19,11 @@ class Subscription extends Model
 
     public function subscriptionType()
     {
+<<<<<<< HEAD
         return $this->belongsTo(SubscriptionType::class, 'subscriptiontypes_id', 'id');
+=======
+        return $this->belongsTo(SubscriptionType::class, 'subscription_types_id', 'id');
+>>>>>>> af5e58c2e61b2bbfbd15d71ecd41e05cc9820569
     }
 
     public function customer()

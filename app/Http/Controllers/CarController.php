@@ -15,8 +15,7 @@ class CarController extends Controller
     {
         //
         $cars = Car::all(); // Retrieve all cars from the database
-    return view('car.index', ['cars'=> $cars]);
-
+        return view('car.index', ['cars' => $cars]);
     }
 
     /**
@@ -41,16 +40,15 @@ class CarController extends Controller
     public function store(Request $request)
     {
         //dd($request-> name);
-        $data = $request-> validate([
-            'name'=> 'required',
-            'color'=> 'required',
-            'plate_number'=> 'required',
+        $data = $request->validate([
+            'name' => 'required',
+            'color' => 'required',
+            'plate_number' => 'required',
             'customers_id' => 'required|exists:customers,id',
         ]);
-        $newCar= car:: create($data);
+        $newCar = car::create($data);
 
-        return redirect(route('car.index'))->with('success', 'Car Added successfully');
-
+        return redirect(route('customer.view', ['customer'=>$newCar->customer]))->with('success', 'Car Added successfully');
     }
 
     /**
@@ -79,14 +77,14 @@ class CarController extends Controller
     {
         //
         // return $request;
-        $data = $request-> validate([
-            'name'=> 'required',
-            'color'=> 'required',
-            'plate_number'=> 'required',
+        $data = $request->validate([
+            'name' => 'required',
+            'color' => 'required',
+            'plate_number' => 'required',
             'customers_id' => 'required|exists:customers,id',
         ]);
 
-        $car ->update($data);
+        $car->update($data);
 
         return redirect(route('car.index'))->with('success', 'Car Updated Succesfuly');
     }
@@ -98,8 +96,6 @@ class CarController extends Controller
     {
         //
         $car->delete();
-    return redirect()->route('car.index')->with('success', 'Car deleted successfully');
+        return redirect()->route('car.index')->with('success', 'Car deleted successfully');
     }
-
-
 }

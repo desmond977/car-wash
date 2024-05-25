@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Http\Requests\CustomerUpdateRequest;
+use App\Models\Subscription;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -95,8 +96,18 @@ class CustomerController extends Controller
     // }
     public function view($id)
     {
+<<<<<<< HEAD
         // Fetch the customer with their subscriptions and cars
         $customer = Customer::with(['subscriptions.subscriptionType', 'cars'])->findOrFail($id);
+=======
+        // return $id;
+        $customer = Customer::with(['subscriptions.subscriptionType', 'cars', 'sub'])
+            ->where('id', $id)->first();
+        // $subscriptions = Subscription::where('customers_id', $id)->get();
+        // return $subscriptions;
+        // return $customer;
+        return view('customer.view')->with('customer', $customer);
+>>>>>>> af5e58c2e61b2bbfbd15d71ecd41e05cc9820569
 
         if ($customer->subscriptions->isEmpty()) {
             dd('No subscriptions found', $customer->subscriptions);

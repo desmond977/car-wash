@@ -64,8 +64,13 @@ Route::put('/subscription_type/{subscription_type}/update', [SubscriptionTypeCon
 Route::delete('/subscription_type/{subscription_type}/delete', [SubscriptionTypeController::class, 'delete'])->name('subscription_type.delete');
 
 
+<<<<<<< HEAD
 Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription.index');
 Route::get('/subscription/{customer}/subscription', [CarController::class, 'customersubscription'])->name('subscription.customersubscription');
+=======
+
+Route::get('/subscription/{customer}/subscription', [SubscriptionController::class, 'customersubscription'])->name('subscription.customersubscription');
+>>>>>>> af5e58c2e61b2bbfbd15d71ecd41e05cc9820569
 Route::get('/customers/{customer}/subscription/create', [SubscriptionController::class, 'create'])->name('subscription.create');
 Route::post('/customers/{customer}/subscription', [SubscriptionController::class, 'store'])->name('subscription.store');
 // Route::put('/subscription/{subscription}', [SubscriptionController::class, 'update'])->name('subscription.update');

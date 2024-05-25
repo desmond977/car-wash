@@ -26,8 +26,6 @@
                     class="mb-4 inline-block px-4 py-2 bg-blue-600 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Add
                     Subscription</a>
 
-
-                {{$customer->subscriptions}}
                 @if (count($customer->subscriptions)==0)
                     <p class="text-gray-700">No subscriptions found for this customer.</p>
                 @else
@@ -47,8 +45,13 @@
                                             {{ $subscription->start_date }}</p>
                                         <p class="text-gray-700"><strong>End Date:</strong>
                                             {{ $subscription->end_date }}</p>
+<<<<<<< HEAD
                                         <div class="flex space-x-2 mt-2">
                                             <a href=""
+=======
+                                        {{-- <div class="flex space-x-2 mt-2">
+                                            <a href="{{ route('subscription.edit', $subscription->id) }}"
+>>>>>>> af5e58c2e61b2bbfbd15d71ecd41e05cc9820569
                                                 class="px-4 py-2 bg-gray-600 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out">Edit</a>
                                             <form action=""
                                                 method="POST" class="inline-block">
@@ -57,7 +60,7 @@
                                                 <button type="submit"
                                                     class="px-4 py-2 bg-red-600 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Delete</button>
                                             </form>
-                                        </div>
+                                        </div> --}}
                                     </li>
                                 @endforeach
                             </ul>
