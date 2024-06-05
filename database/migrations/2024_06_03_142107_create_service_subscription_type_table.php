@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wash_histories', function (Blueprint $table) {
+        Schema::create('service_subscription_type', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('subscription_id');
-            $table->dateTime('wash_date');
+            $table->foreignId('service_id')->constrained()->onDelete('cascade');
+            $table->foreignId('subscription_type_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-            $table->foreign('subscription_id')->references('id')->on('subscriptions')->onDelete('cascade');
-
         });
     }
 
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wash_histories');
+        Schema::dropIfExists('service_subscription_type');
     }
 };

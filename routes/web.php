@@ -1,10 +1,12 @@
 <?php
-
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\SubscriptionTypeController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SubscriptionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +23,9 @@ Route::get('/', function () {
     return view('auth.signin');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [CustomerController::class, 'edit'])->name('profile.edit');
@@ -68,9 +70,17 @@ Route::delete('/subscription_type/{subscription_type}/delete', [SubscriptionType
 Route::get('/subscription/{customer}/subscription', [SubscriptionController::class, 'customersubscription'])->name('subscription.customersubscription');
 Route::get('/customers/{customer}/subscription/create', [SubscriptionController::class, 'create'])->name('subscription.create');
 Route::post('/customers/{customer}/subscription', [SubscriptionController::class, 'store'])->name('subscription.store');
-// Route::get('/subscription/{subscription}/edit', [SubscriptionController::class, 'edit'])->name('subscription.edit');
-// Route::put('/subscription/{subscription}', [SubscriptionController::class, 'update'])->name('subscription.update');
+Route::get('/customers/{customer}/subscription/{subscription}/edit', [SubscriptionController::class, 'edit'])->name('subscription.edit');
+// Route::get('/subscriptions/{subscription}/edit', [SubscriptionController::class, 'edit'])->name('subscription.edit'); // Correct route
+// Route::get('/subscription/{customer}/subscription', [SubscriptionController::class, 'edit'])->name('subscription.edit');
+// Route::get('/subscription/{subscription}/edit', [SubscriptionController::class, 'edit'])->name('subscription.edit'); // Correct route
+Route::put('/customers/{customer}/subscription', [SubscriptionController::class, 'update'])->name('subscription.update');
+
 // Route::delete('/subscription/{subscription}', [SubscriptionController::class, 'destroy'])->name('subscription.destroy');
 
-
-
+Route::get('/service/create', [ServiceController::class, 'create'])->name('service.create');
+Route::get('/service/index', [ServiceController::class, 'index'])->name('service.index');
+Route::post('/service', [ServiceController::class, 'store'])->name('service.store');
+Route::put('/service/{service}/update', [ServiceController::class, 'update'])->name('service.update');
+Route::get('/service/{service}/edit', [ServiceController::class, 'edit'])->name('service.edit');
+Route::delete('/service/{service}/delete', [ServiceController::class, 'delete'])->name('service.delete');

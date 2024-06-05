@@ -17,15 +17,20 @@ class SubscriptionType extends Model
     ];
 
      // Define relationships
-     public function subscription()
+     public function subscriptions()
      {
-         return $this->hasMany(Subscription::class, 'subscriptionType_id');
+         return $this->hasMany(Subscription::class, 'subscription_types_id');
      }
+     public function services()
+     {
+         return $this->belongsToMany(Service::class, 'service_subscription_type');
+     }
+
 
      // Helper methods
      public function formattedPrice()
      {
-         return '$' . number_format($this->price, 2);
+         return 'N' . number_format($this->price, 2);
      }
 
      public function formattedDuration()

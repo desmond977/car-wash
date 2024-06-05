@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SubscriptionType;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class SubscriptionTypeController extends Controller
@@ -17,23 +18,31 @@ class SubscriptionTypeController extends Controller
 
     public function create()
     {
-        return view('subscription_type.create');
+        $services = Service::all();
+        return view('subscription_type.create', compact('services'));
+
     }
 
     public function store(Request $request)
-    {
-         //dd($request-> name);
-        $data = $request-> validate([
-            'name'=> 'required',
-            'description'=> 'required',
-            'price'=> 'required',
-            'number_cars_allowed'=> 'required',
-            'duration'=> 'required',
-        ]);
+{
+    $data = $request->validate([
+        'name' => 'required',
+        'description' => 'required',
+        'price' => 'required',
+        'number_cars_allowed' => 'required',
+        'duration' => 'required',
+        'services' => 'array',
+        'services.*' => 'exists:services,id',
+    ]);
 
-        $newSubscriptionType= SubscriptionType:: create($data);
-        return redirect()->route('subscription_type.index')->with('success', 'Subscription Type created successfully.');
-    }
+    $newSubscriptionType = SubscriptionType::create($data);
+
+    // Sync the services
+    $newSubscriptionType->services()->sync($request->services);
+
+    return redirect()->route('subscription_type.index')->with('success', 'Subscription Type created successfully.');
+}
+
 
     public function view($id)
     {
@@ -43,8 +52,10 @@ class SubscriptionTypeController extends Controller
 
     public function edit($id)
     {
-        $subscriptionType = SubscriptionType::findOrFail($id);
-        return view('subscription_type.edit')->with('subscriptionType', $subscriptionType);
+        $subscriptionType = SubscriptionType::with('services')->findOrFail($id);
+        $services = Service::all(); // Assuming you have a Service model and table
+        return view('subscription_type.edit', compact('subscriptionType', 'services'));
+        // return view('subscription_type.edit')->with('subscriptionType', $subscriptionType);
     }
 
     public function update(subscriptionType $subscriptionType, Request $request)
@@ -55,9 +66,14 @@ class SubscriptionTypeController extends Controller
             'price'=> 'required',
             'number_cars_allowed'=> 'required',
             'duration'=> 'required',
+            'services' => 'array',
+            'services.*' => 'exists:services,id',
         ]);
 
         $subscriptionType -> update($data);
+
+         // Sync the services
+        $subscriptionType->services()->sync($request->services);
 
         return redirect()->route('subscription_type.index')->with('success', 'Subscription Plan updated successfully.');
     }
