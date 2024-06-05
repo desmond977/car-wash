@@ -1,4 +1,6 @@
-<x-app-layout>
+{{-- <x-app-layout> --}}
+@extends('layouts.dashboard')
+@section('content')
     <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
 
     <div class="flex h-screen bg-gray-100">
@@ -9,7 +11,8 @@
         <div class="flex-1 p-6">
             <div class="mb-4 flex justify-between items-center">
                 <h1 class="text-2xl font-bold">Customers</h1>
-                <a href="{{ route('customer.create') }}" class="btn btn-primary bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add New Customer</a>
+                <a href="{{ route('customer.create') }}"
+                    class="btn btn-primary bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add New Customer</a>
             </div>
 
             @if (session()->has('success'))
@@ -18,7 +21,7 @@
                 </div>
             @endif
 
-            @if(!$customer)
+            @if (!$customer)
                 <p>No customers available.</p>
             @else
                 <table class="w-full border-collapse border border-gray-400">
@@ -44,12 +47,16 @@
                                 <td class="px-4 py-2 border border-gray-400">{{ $cust->email }}</td>
                                 <td class="px-4 py-2 border border-gray-400">{{ $cust->users_id }}</td>
                                 <td class="px-4 py-2 border border-gray-400 flex space-x-2">
-                                    <a href="{{ route('customer.edit', ['customer' => $cust]) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Edit</a>
-                                    <a href="{{ route('customer.view', ['customer' => $cust]) }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">View</a>
-                                    <form method="POST" action="{{ route('customer.delete', ['customer' => $cust]) }}" class="inline">
+                                    <a href="{{ route('customer.edit', ['customer' => $cust]) }}"
+                                        class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Edit</a>
+                                    <a href="{{ route('customer.view', ['customer' => $cust]) }}"
+                                        class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">View</a>
+                                    <form method="POST" action="{{ route('customer.delete', ['customer' => $cust]) }}"
+                                        class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+                                        <button type="submit"
+                                            class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -59,4 +66,4 @@
             @endif
         </div>
     </div>
-</x-app-layout>
+@endsection

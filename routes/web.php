@@ -18,7 +18,7 @@ use App\Http\Controllers\SubscriptionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.signin');
 });
 
 Route::get('/dashboard', function () {
