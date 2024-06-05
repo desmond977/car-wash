@@ -26,7 +26,7 @@
                     class="mb-4 inline-block px-4 py-2 bg-blue-600 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Add
                     Subscription</a>
 
-                @if (count($customer->subscriptions)==0)
+                @if (count($customer->subscriptions) == 0)
                     <p class="text-gray-700">No subscriptions found for this customer.</p>
                 @else
                     <div class="bg-white shadow-md rounded-lg p-4">
@@ -40,27 +40,13 @@
                                         <p class="text-gray-700"><strong>Subscription Type:</strong>
                                             {{ $subscription->subscriptionType->name }}</p>
                                         <p class="text-gray-700"><strong>Number of Washes:</strong>
-                                            {{ $subscription->number_of_wash }}</p>
+                                            {{ $subscription->number_of_wash }}
+                                        </p>
                                         <p class="text-gray-700"><strong>Start Date:</strong>
                                             {{ $subscription->start_date }}</p>
                                         <p class="text-gray-700"><strong>End Date:</strong>
                                             {{ $subscription->end_date }}</p>
-<<<<<<< HEAD
-                                        <div class="flex space-x-2 mt-2">
-                                            <a href=""
-=======
-                                        {{-- <div class="flex space-x-2 mt-2">
-                                            <a href="{{ route('subscription.edit', $subscription->id) }}"
->>>>>>> af5e58c2e61b2bbfbd15d71ecd41e05cc9820569
-                                                class="px-4 py-2 bg-gray-600 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out">Edit</a>
-                                            <form action=""
-                                                method="POST" class="inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="px-4 py-2 bg-red-600 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">Delete</button>
-                                            </form>
-                                        </div> --}}
+
                                     </li>
                                 @endforeach
                             </ul>
@@ -68,12 +54,37 @@
                     </div>
                 @endif
 
+                 <!-- Services List -->
+                 <div class="bg-white shadow-md rounded-lg p-4">
+
+
+                 @if ($subscription->subscriptionType->services->isNotEmpty())
+                 <h4 class="text-lg font-semibold mt-4">Services Included:</h4>
+                 @include('service.index', ['services' => $customer->services])
+
+                 {{-- <ul class="list-disc pl-5"> --}}
+                     {{-- @foreach ($subscription->subscriptionType->services as $service)
+                         <li>{{ $service->name }}</li>
+                         <li>{{ $service->wash }}</li>
+                         <li>{{ $service->vacuum_cleaning }}</li>
+                         <li>{{ $service->engine_wash }}</li>
+                         <li>{{ $service->Guest_wash }}</li>
+                         <li>{{ $service->tire_guage }}</li>
+                         <li>{{ $service->engine_blow }}</li>
+                         <li>{{ $service->dashboard_polish }}</li>
+                     @endforeach
+                 </ul>--}}
+             @endif
+           </div>
+
+
+              <!-- Car List -->
                 <h2 class="text-2xl font-semibold mb-4 mt-6">Cars</h2>
                 <a href="{{ route('car.customercar', $customer->id) }}"
                     class="mb-4 inline-block px-4 py-2 bg-blue-600 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Add
                     Car</a>
 
-                @if (!isset($customer->cars))
+                @if (!isset($customer->cars) || $customer->cars->isEmpty())
                     <p class="text-gray-700">No cars found for this customer.</p>
                 @else
                     @include('car.index', ['cars' => $customer->cars])

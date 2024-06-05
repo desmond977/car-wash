@@ -17,14 +17,7 @@
 
             </select>
             </li>
-            <li class="mb-2">
-                <select onchange="window.location.href=this.value" class="block appearance-none w-full bg-gray-700 border border-gray-600 text-white py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-gray-800 focus:border-gray-700">
-                    <option value="#" selected disabled>Cars</option>
-                    <option value="{{ route('car.index') }}">View All Cars</option>
-                    <option value="{{ route('car.create') }}">Add a new Car</option>
 
-                </select>
-            </li>
 
             <li class="mb-2">
                 <select onchange="window.location.href=this.value" class="block appearance-none w-full bg-gray-700 border border-gray-600 text-white py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-gray-800 focus:border-gray-700">

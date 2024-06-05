@@ -31,4 +31,5 @@ class Customer extends Model
     {
         return $this->hasMany(Car::class, 'customers_id', 'id');
     }
+
 }

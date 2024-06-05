@@ -1,14 +1,14 @@
 
 <div class="container">
     <h1>Edit Subscription</h1>
-    <form action="{{ route('subscriptions.update', $subscription->id) }}" method="POST">
+    <form action="" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label for="subscriptiontypes_id">Subscription Type</label>
-            <select name="subscriptiontypes_id" id="subscriptiontypes_id" class="form-control">
+            <label for="subscription_types_id">Subscription Type</label>
+            <select name="subscription_types_id" id="subscription_types_id" class="form-control">
                 @foreach ($subscriptionTypes as $type)
-                    <option value="{{ $type->id }}" {{ $type->id == $subscription->subscriptiontypes_id ? 'selected' : '' }}>{{ $type->name }}</option>
+                    <option value="{{ $type->id }}" {{ $type->id == $subscription->subscription_types_id ? 'selected' : '' }}>{{ $type->name }}</option>
                 @endforeach
             </select>
         </div>
