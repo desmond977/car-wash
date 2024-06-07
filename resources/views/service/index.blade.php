@@ -29,7 +29,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($services as $service)
+                    @if (!is_null($services) && $services->isNotEmpty())
+                    @foreach ($services as $service)
                         <tr>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $service->id }}</td>
                             <td class="py-2 px-4 border-b border-gray-200">{{ $service->name }}</td>
@@ -52,6 +53,9 @@
                         </tr>
                     @endforeach
                 </tbody>
+                @else
+                   <p>No services included.</p>
+                @endif
             </table>
         </div>
     {{-- </div>

@@ -1,8 +1,10 @@
-<x-app-layout>
+{{-- <x-app-layout> --}}
+    @extends('layouts.dashboard')
+@section('content')
      <!-- Main Layout -->
      <div class="flex h-screen bg-gray-100">
         <!-- Include the sidebar component -->
-        <x-sidebar />
+        {{-- <x-sidebar /> --}}
     <div class="container mx-auto">
         <h1 class="text-2xl font-bold mb-4">Create Service</h1>
         <form action="{{ route('service.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md">
@@ -46,4 +48,5 @@
             <input type="submit" value="Save Service" class="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         </form>
     </div>
-</x-app-layout>
+{{-- </x-app-layout> --}}
+@endsection

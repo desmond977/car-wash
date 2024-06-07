@@ -1,10 +1,13 @@
-<x-app-layout>
+{{-- <x-app-layout> --}}
+    @extends('layouts.dashboard')
+@section('content')
+
     <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
 
     <!-- Main Layout -->
     <div class="flex h-screen bg-gray-100">
         <!-- Include the sidebar component -->
-        <x-sidebar />
+        {{-- <x-sidebar /> --}}
 
         <!-- Main content -->
         <div class="flex-1 p-6">
@@ -54,13 +57,17 @@
                     </div>
                 @endif
 
-                 <!-- Services List -->
+                 {{-- <!-- Services List -->
                  <div class="bg-white shadow-md rounded-lg p-4">
 
 
-                 @if ($subscription->subscriptionType->services->isNotEmpty())
-                 <h4 class="text-lg font-semibold mt-4">Services Included:</h4>
-                 @include('service.index', ['services' => $customer->services])
+                    @if (isset($subscription) && $subscription->subscriptionType && $subscription->subscriptionType->services->isNotEmpty())
+                    <h4 class="text-lg font-semibold mt-4">Services Included:</h4>
+                    @include('service.index', ['services' => $customer->services])
+                @else
+                    <p>No subscription or no services available.</p>
+                @endif --}}
+
 
                  {{-- <ul class="list-disc pl-5"> --}}
                      {{-- @foreach ($subscription->subscriptionType->services as $service)
@@ -74,7 +81,7 @@
                          <li>{{ $service->dashboard_polish }}</li>
                      @endforeach
                  </ul>--}}
-             @endif
+
            </div>
 
 
@@ -88,24 +95,10 @@
                     <p class="text-gray-700">No cars found for this customer.</p>
                 @else
                     @include('car.index', ['cars' => $customer->cars])
-                    {{-- <div class="bg-white shadow-md rounded-lg p-4">
-                        <div class="border-b pb-2 mb-2">
-                            <h3 class="text-xl font-semibold">Car List</h3>
-                        </div>
-                        <div>
-                            <ul class="list-disc pl-5 space-y-4">
-                                @foreach ($customer->cars as $car)
-                                    <li class="bg-gray-50 p-4 rounded-lg shadow">
-                                        <p class="text-gray-700"><strong>Name:</strong> {{ $car->name }}</p>
-                                        <p class="text-gray-700"><strong>Color:</strong> {{ $car->color }}</p>
-                                        <p class="text-gray-700"><strong>Plate Number:</strong> {{ $car->plate_number }}</p>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div> --}}
+
                 @endif
             </div>
         </div>
     </div>
-</x-app-layout>
+{{-- </x-app-layout> --}}
+@endsection

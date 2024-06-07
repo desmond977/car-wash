@@ -71,12 +71,12 @@
 
     <ul class="menu-inner py-1">
       <!-- Dashboards -->
-      <li class="menu-item active open" style="background-color: #666cff !important; color:white !important">
+      <li class="menu-item active open" style="background-color: #3236aa !important; color:white !important">
         <a href="{{ route('dashboard') }}" class="menu-link">
           <i class="menu-icon tf-icons mdi mdi-home-outline" style="color: white !important"></i>
           <div data-i18n="Dashboards" style="color: white">Dashboard</div>
         </a>
-        {{-- <ul class="menu-sub">
+         {{-- <ul class="menu-sub">
           <li class="menu-item">
             <a href="app-ecommerce-dashboard.html" class="menu-link">
               <div data-i18n="/eCommerce">Products</div>
@@ -102,27 +102,38 @@
               <div data-i18n="Academy">Academy</div>
             </a>
           </li>
-        </ul> --}}
-      </li>
+        </ul>
+      </li> --}}
 
 
       <!-- Front Pages -->
-     {{-- <li class="menu-item">
-        <a href="{{ route('customers.list') }}" class="menu-link">
-          <i class="menu-icon tf-icons mdi mdi-account-outline"></i>
-          <div data-i18n="Customers">Customers</div>
-          <i class="menu-icon tf-icons mdi mdi-greater-than "></i>
+      <li class="menu-item dropdown">
+        <a href="{{ route('customer.index') }}" class="menu-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="menu-icon tf-icons mdi mdi-account-outline"></i>
+            <div data-i18n="Customers">Customers</div>
         </a>
+        <ul class="dropdown-menu">
+            <li><a href="{{ route('customer.create') }}" class="dropdown-item">Add Customer</a></li>
+            <li><a href="{{ route('customer.index') }}" class="dropdown-item">View Customers</a></li>
+            <!-- Add more dropdown items as needed -->
+        </ul>
     </li>
-      <li class="menu-item">
-        <a href="{{ route('order.list') }}" class="menu-link">
-          <i class="menu-icon tf-icons mdi mdi-flip-to-front"></i>
-          <div data-i18n="Orders">Order</div>
-        </a> --}}
-        {{-- <ul class="menu-sub">
+    <li class="menu-item dropdown">
+        <a href="{{ route('subscription_type.index') }}" class="menu-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="menu-icon tf-icons mdi mdi-flip-to-front"></i>
+            <div data-i18n="Subscriptions Plans">Subscriptions Plans</div>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="{{ route('subscription_type.create') }}" class="dropdown-item">Add Subscription Plan</a></li>
+            <li><a href="{{ route('subscription_type.index') }}" class="dropdown-item">View Subscription Plans</a></li>
+            <!-- Add more dropdown items as needed -->
+        </ul>
+    </li>
+{{--
+        <ul class="menu-sub">
           <li class="menu-item">
-            <a href="../front-pages/landing-page.html" class="menu-link" target="_blank">
-              <div data-i18n="Landing">Landing</div>
+            <a href="{{ route('subscription_type.create') }}" class="menu-link" target="_blank">
+              <div data-i18n="Landing">Create A Subscription</div>
             </a>
           </li>
           <li class="menu-item">

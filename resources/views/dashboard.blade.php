@@ -1,30 +1,32 @@
 <!-- resources/views/dashboard.blade.php -->
-<x-app-layout>
-    <div class="flex h-screen bg-gray-100">
+{{-- <x-app-layout> --}}
+    @extends('layouts.dashboard')
+    @section('content')
+
         <!-- Include the sidebar component -->
-        <x-sidebar />
+        {{-- <x-sidebar /> --}}
 
         <!-- Main content -->
-        <div class="flex-1 p-6">
+        <div class="">
             <div class="container mx-auto">
-                <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
+                <h1 >Dashboard</h1>
 
                 <!-- Statistics -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                    <div class="bg-white shadow rounded-lg p-6 border border-gray-200">
-                        <h2 class="text-xl font-bold">Total Customers</h2>
+                <div class="row mb-4">
+                    <div class="bg-white shadow rounded-lg border custom-padding custom-border col-12 col-md-6 col-lg-3 mb-3 ml-1 mr-1">
+                        <h2 class="h4 font-weight-normal">Total Customers</h2>
                         <p class="text-2xl">{{ $totalCustomers }}</p>
                     </div>
-                    <div class="bg-white shadow rounded-lg p-6 border border-gray-200">
-                        <h2 class="text-xl font-bold">Total Subscriptions</h2>
+                    <div class="bg-white shadow rounded-lg border custom-padding custom-border col-12 col-md-6 col-lg-3 mb-3 ml-1 mr-1">
+                        <h2 class="h4 font-weight-normal">Total Subscriptions</h2>
                         <p class="text-2xl">{{ $totalSubscriptions }}</p>
                     </div>
-                    <div class="bg-white shadow rounded-lg p-6 border border-gray-200">
-                        <h2 class="text-xl font-bold">Total Revenue</h2>
+                    <div class="bg-white shadow rounded-lg border custom-padding custom-border col-12 col-md-6 col-lg-3 mb-3 ml-1 mr-1">
+                        <h2 class="h4 font-weight-normal">Total Revenue</h2>
                         <p class="text-2xl">${{ $totalRevenue }}</p>
                     </div>
-                    <div class="bg-white shadow rounded-lg p-6 border border-gray-200">
-                        <h2 class="text-xl font-bold">Other Statistic</h2>
+                    <div class="bg-white shadow rounded-lg border custom-padding custom-border col-12 col-md-6 col-lg-3 mb-3 ml-1 mr-1">
+                        <h2 class="h4 font-weight-normal">Other Statistic</h2>
                         <p class="text-2xl">{{ $otherStatistic }}</p>
                     </div>
                 </div>
@@ -108,4 +110,5 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+{{-- </x-app-layout> --}}
+@endsection

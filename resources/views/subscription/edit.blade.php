@@ -1,4 +1,5 @@
-
+@extends('layouts.dashboard')
+@section('content')
 <div class="container">
     <h1>Edit Subscription</h1>
     <form action="" method="POST">
@@ -27,4 +28,5 @@
         <button type="submit" class="btn btn-primary">Update Subscription</button>
     </form>
 </div>
+@endsection
 

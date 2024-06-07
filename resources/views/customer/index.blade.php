@@ -5,7 +5,7 @@
 
     <div class="flex h-screen bg-gray-100">
         <!-- Include the sidebar component -->
-        <x-sidebar />
+        {{-- <x-sidebar /> --}}
 
         <!-- Main content -->
         <div class="flex-1 p-6">
@@ -24,16 +24,24 @@
             @if (!$customer)
                 <p>No customers available.</p>
             @else
-                <table class="w-full border-collapse border border-gray-400">
-                    <thead>
-                        <tr>
+            <table class="datatables-order table dataTable no-footer dtr-column" id="DataTables_Table_0"
+            aria-describedby="DataTables_Table_0_info">
+            <thead class="table-light">
+                <tr>
                             <th class="px-4 py-2 bg-gray-200 border border-gray-400">ID</th>
-                            <th class="px-4 py-2 bg-gray-200 border border-gray-400">First Name</th>
-                            <th class="px-4 py-2 bg-gray-200 border border-gray-400">Last Name</th>
-                            <th class="px-4 py-2 bg-gray-200 border border-gray-400">Phone Number</th>
+                            <th class="sorting sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                            colspan="1" style="width: 72.8854px;" aria-sort="ascending"
+                            aria-label="date: activate to sort column descending">First Name</th>
+                            <th th class="sorting sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                            colspan="1" style="width: 72.8854px;" aria-sort="ascending"
+                            aria-label="date: activate to sort column descending">Last Name</th>
+                            <th th class="sorting sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                            colspan="1" style="width: 72.8854px;" aria-sort="ascending"
+                            aria-label="date: activate to sort column descending">Phone Number</th>
                             <th class="px-4 py-2 bg-gray-200 border border-gray-400">Email</th>
                             <th class="px-4 py-2 bg-gray-200 border border-gray-400">User Id</th>
-                            <th class="px-4 py-2 bg-gray-200 border border-gray-400">Actions</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 106.729px;"
+                            aria-label="Actions">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,15 +56,15 @@
                                 <td class="px-4 py-2 border border-gray-400">{{ $cust->users_id }}</td>
                                 <td class="px-4 py-2 border border-gray-400 flex space-x-2">
                                     <a href="{{ route('customer.edit', ['customer' => $cust]) }}"
-                                        class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Edit</a>
+                                        class="btn btn-secondary text-white px-3 py-1 mt-1 rounded custom-hover">Edit</a>
                                     <a href="{{ route('customer.view', ['customer' => $cust]) }}"
-                                        class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">View</a>
+                                        class="btn btn-primary text-white px-3 py-1 mt-1 rounded custom-hover">View</a>
                                     <form method="POST" action="{{ route('customer.delete', ['customer' => $cust]) }}"
                                         class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+                                        class="btn btn-warning text-white px-3 py-1 mt-1 rounded custom-hover">Delete</button>
                                     </form>
                                 </td>
                             </tr>

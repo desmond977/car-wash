@@ -1,10 +1,12 @@
-<x-app-layout>
+{{-- <x-app-layout> --}}
+    @extends('layouts.dashboard')
+@section('content')
     <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
 
     <!-- Example usage in a view -->
     <div class="flex h-screen bg-gray-100">
         <!-- Include the sidebar component -->
-        <x-sidebar />
+        {{-- <x-sidebar /> --}}
 
         <!-- Main content -->
         <div class="flex-1 p-6">
@@ -42,4 +44,5 @@
             </form>
         </div>
     </div>
-</x-app-layout>
+{{-- </x-app-layout> --}}
+@endsection
