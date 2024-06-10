@@ -1,4 +1,6 @@
 <!-- resources/views/dashboard.blade.php -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
 {{-- <x-app-layout> --}}
     @extends('layouts.dashboard')
     @section('content')
@@ -11,33 +13,46 @@
             <div class="container mx-auto">
                 <h1 >Dashboard</h1>
 
-                <!-- Statistics -->
-                <div class="row mb-4">
-                    <div class="col-12 col-md-6 col-lg-3 mb-3">
-                        <div class="bg-white shadow rounded-lg border p-3">
-                            <h2 class="h4 font-weight-normal">Total Customers</h2>
-                            <p class="display-4">{{ $totalCustomers }}</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3 mb-3">
-                        <div class="bg-white shadow rounded-lg border p-3">
-                            <h2 class="h4 font-weight-normal">Total Subscriptions</h2>
-                            <p class="display-4">{{ $totalSubscriptions }}</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3 mb-3">
-                        <div class="bg-white shadow rounded-lg border p-3">
-                            <h2 class="h4 font-weight-normal">Total Revenue</h2>
-                            <p class="display-4">${{ $totalRevenue }}</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-3 mb-3">
-                        <div class="bg-white shadow rounded-lg border p-3">
-                            <h2 class="h4 font-weight-normal">Other Statistic</h2>
-                            <p class="display-4">{{ $otherStatistic }}</p>
-                        </div>
-                    </div>
-                </div>
+               <!-- Statistics -->
+<div class="row mb-4">
+    <div class="col-12 col-md-6 col-lg-3 mb-3">
+        <div class="bg-white shadow rounded-lg border p-3 d-flex align-items-center">
+            <i class="bi bi-people-fill display-6 text-primary me-3"></i>
+            <div>
+                <h2 class="h4 font-weight-normal mb-0">Total Customers</h2>
+                <p class="display-6 mb-0">{{ $totalCustomers }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 mb-3">
+        <div class="bg-white shadow rounded-lg border p-3 d-flex align-items-center">
+            <i class="bi bi-card-checklist display-6 text-success me-3"></i>
+            <div>
+                <h2 class="h4 font-weight-normal mb-0">Total Subscriptions</h2>
+                <p class="display-6 mb-0">{{ $totalSubscriptions }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 mb-3">
+        <div class="bg-white shadow rounded-lg border p-3 d-flex align-items-center">
+            <i class="bi bi-currency-dollar display-6 text-warning me-3"></i>
+            <div>
+                <h2 class="h4 font-weight-normal mb-0">Total Revenue</h2>
+                <p class="display-6 mb-0">${{ $totalRevenue }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 mb-3">
+        <div class="bg-white shadow rounded-lg border p-3 d-flex align-items-center">
+            <i class="bi bi-graph-up-arrow display-6 text-info me-3"></i>
+            <div>
+                <h2 class="h4 font-weight-normal mb-0">Remaining Wash</h2>
+                <p class="display-6 mb-0">{{ $otherStatistic }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
                 <!-- Customers List -->
