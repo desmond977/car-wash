@@ -1,104 +1,81 @@
 {{-- <x-app-layout> --}}
     @extends('layouts.dashboard')
-@section('content')
+    @section('content')
 
-    <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
 
-    <!-- Main Layout -->
-    <div class="flex h-screen bg-gray-100">
-        <!-- Include the sidebar component -->
-        {{-- <x-sidebar /> --}}
+        <!-- Main Layout -->
+        <div class="d-flex vh-100 bg-light">
+            <!-- Include the sidebar component -->
+            {{-- <x-sidebar /> --}}
 
-        <!-- Main content -->
-        <div class="flex-1 p-6">
-            <div class="container mx-auto">
-                <h1 class="text-3xl font-bold mb-4">Customer Details</h1>
+            <!-- Main content -->
+            <div class="flex-grow-1 p-4">
+                <div class="container">
+                    <h1 class="h3 font-weight-bold mb-4">Customer Details</h1>
 
-                <div class="bg-white shadow-md rounded-lg mb-6 p-4">
-                    <div class="border-b pb-2 mb-2">
-                        <h2 class="text-xl font-semibold">{{ $customer->first_name }} {{ $customer->last_name }}</h2>
+                    <!-- Customer Info -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h2 class="h5 mb-0 text-white">{{ $customer->first_name }} {{ $customer->last_name }}</h2>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Email:</strong> {{ $customer->email }}</p>
+                            <p><strong>Phone:</strong> {{ $customer->phone_number }}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-gray-700"><strong>Email:</strong> {{ $customer->email }}</p>
-                        <p class="text-gray-700"><strong>Phone:</strong> {{ $customer->phone_number }}</p>
-                    </div>
+
+                    <!-- Subscriptions -->
+                    <h2 class="h4 mb-3">Subscriptions</h2>
+                    <a href="{{ route('subscription.create', $customer->id) }}"
+                        class="btn btn-primary mb-3">Add Subscription</a>
+
+                    @if (count($customer->subscriptions) == 0)
+                        <p>No subscriptions found for this customer.</p>
+                    @else
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h3 class="h5 mb-0">Subscription List</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    @foreach ($customer->subscriptions as $subscription)
+                                        <li class="border rounded mb-3 p-3 bg-light">
+                                            <p><strong>Subscription Type:</strong> {{ $subscription->subscriptionType->name }}</p>
+                                            <p><strong>Number of Washes:</strong> {{ $subscription->number_of_wash }}</p>
+                                            <p><strong>Start Date:</strong> {{ $subscription->start_date }}</p>
+                                            <p><strong>End Date:</strong> {{ $subscription->end_date }}</p>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Car List -->
+                    <h2 class="h4 mb-3 mt-4">Cars</h2>
+                    <a href="{{ route('car.customercar', $customer->id) }}"
+                        class="btn btn-primary mb-3">Add Car</a>
+
+                    @if (!isset($customer->cars) || $customer->cars->isEmpty())
+                        <p>No cars found for this customer.</p>
+                    @else
+                        <div class="row">
+                            @foreach ($customer->cars as $car)
+                                <div class="col-12 col-md-6 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $car->name }}</h5>
+                                            <p class="card-text"><strong>Color:</strong> {{ $car->color }}</p>
+                                            <p class="card-text"><strong>Plate Number:</strong> {{ $car->plate_number }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
-
-                <h2 class="text-2xl font-semibold mb-4">Subscriptions</h2>
-                <a href="{{ route('subscription.create', $customer->id) }}"
-                    class="mb-4 inline-block px-4 py-2 bg-blue-600 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Add
-                    Subscription</a>
-
-                @if (count($customer->subscriptions) == 0)
-                    <p class="text-gray-700">No subscriptions found for this customer.</p>
-                @else
-                    <div class="bg-white shadow-md rounded-lg p-4">
-                        <div class="border-b pb-2 mb-2">
-                            <h3 class="text-xl font-semibold">Subscription List</h3>
-                        </div>
-                        <div>
-                            <ul class="list-disc pl-5 space-y-4">
-                                @foreach ($customer->subscriptions as $subscription)
-                                    <li class="bg-gray-50 p-4 rounded-lg shadow">
-                                        <p class="text-gray-700"><strong>Subscription Type:</strong>
-                                            {{ $subscription->subscriptionType->name }}</p>
-                                        <p class="text-gray-700"><strong>Number of Washes:</strong>
-                                            {{ $subscription->number_of_wash }}
-                                        </p>
-                                        <p class="text-gray-700"><strong>Start Date:</strong>
-                                            {{ $subscription->start_date }}</p>
-                                        <p class="text-gray-700"><strong>End Date:</strong>
-                                            {{ $subscription->end_date }}</p>
-
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                @endif
-
-                 {{-- <!-- Services List -->
-                 <div class="bg-white shadow-md rounded-lg p-4">
-
-
-                    @if (isset($subscription) && $subscription->subscriptionType && $subscription->subscriptionType->services->isNotEmpty())
-                    <h4 class="text-lg font-semibold mt-4">Services Included:</h4>
-                    @include('service.index', ['services' => $customer->services])
-                @else
-                    <p>No subscription or no services available.</p>
-                @endif --}}
-
-
-                 {{-- <ul class="list-disc pl-5"> --}}
-                     {{-- @foreach ($subscription->subscriptionType->services as $service)
-                         <li>{{ $service->name }}</li>
-                         <li>{{ $service->wash }}</li>
-                         <li>{{ $service->vacuum_cleaning }}</li>
-                         <li>{{ $service->engine_wash }}</li>
-                         <li>{{ $service->Guest_wash }}</li>
-                         <li>{{ $service->tire_guage }}</li>
-                         <li>{{ $service->engine_blow }}</li>
-                         <li>{{ $service->dashboard_polish }}</li>
-                     @endforeach
-                 </ul>--}}
-
-           </div>
-
-
-              <!-- Car List -->
-                <h2 class="text-2xl font-semibold mb-4 mt-6">Cars</h2>
-                <a href="{{ route('car.customercar', $customer->id) }}"
-                    class="mb-4 inline-block px-4 py-2 bg-blue-600 text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Add
-                    Car</a>
-
-                @if (!isset($customer->cars) || $customer->cars->isEmpty())
-                    <p class="text-gray-700">No cars found for this customer.</p>
-                @else
-                    @include('car.index', ['cars' => $customer->cars])
-
-                @endif
             </div>
         </div>
-    </div>
-{{-- </x-app-layout> --}}
-@endsection
+    @endsection
+    {{-- </x-app-layout> --}}

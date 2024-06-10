@@ -69,9 +69,9 @@
 
     <div class="menu-inner-shadow"></div>
 
-    <ul class="menu-inner py-1">
+    <ul class="menu-inner py-1" style="background-color: #666CFF">
       <!-- Dashboards -->
-      <li class="menu-item active open" style="background-color: #3236aa !important; color:white !important">
+      <li class="menu-item active open">
         <a href="{{ route('dashboard') }}" class="menu-link">
           <i class="menu-icon tf-icons mdi mdi-home-outline" style="color: white !important"></i>
           <div data-i18n="Dashboards" style="color: white">Dashboard</div>
@@ -107,21 +107,21 @@
 
 
       <!-- Front Pages -->
-      <li class="menu-item dropdown">
+      <li class="menu-item dropdown" >
         <a href="{{ route('customer.index') }}" class="menu-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="menu-icon tf-icons mdi mdi-account-outline"></i>
-            <div data-i18n="Customers">Customers</div>
+            <i class="menu-icon tf-icons mdi mdi-account-outline" style="color: white !important"></i>
+            <div style="color: white !important" data-i18n="Customers" >Customers</div>
         </a>
         <ul class="dropdown-menu">
+            <li><a href="{{ route('customer.index') }}" class="dropdown-item">Customers</a></li>
             <li><a href="{{ route('customer.create') }}" class="dropdown-item">Add Customer</a></li>
-            <li><a href="{{ route('customer.index') }}" class="dropdown-item">View Customers</a></li>
             <!-- Add more dropdown items as needed -->
         </ul>
     </li>
-    <li class="menu-item dropdown">
+    <li class="menu-item dropdown text-white">
         <a href="{{ route('subscription_type.index') }}" class="menu-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="menu-icon tf-icons mdi mdi-flip-to-front"></i>
-            <div data-i18n="Subscriptions Plans">Subscriptions Plans</div>
+            <i class="menu-icon tf-icons mdi mdi-flip-to-front" style="color: white !important"></i>
+            <div style="color: white !important" data-i18n="Subscriptions Plans">Subscriptions Plans</div>
         </a>
         <ul class="dropdown-menu">
             <li><a href="{{ route('subscription_type.create') }}" class="dropdown-item">Add Subscription Plan</a></li>
@@ -129,6 +129,7 @@
             <!-- Add more dropdown items as needed -->
         </ul>
     </li>
+
 {{--
         <ul class="menu-sub">
           <li class="menu-item">

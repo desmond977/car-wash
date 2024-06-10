@@ -1,52 +1,52 @@
 {{-- <x-app-layout> --}}
     @extends('layouts.dashboard')
-@section('content')
+    @section('content')
 
-    <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
 
-    <!-- Main Layout -->
-    <div class="flex h-screen bg-gray-100">
-        <!-- Include the sidebar component -->
-        {{-- <x-sidebar /> --}}
+        <!-- Main Layout -->
+        <div class="d-flex vh-100 bg-light">
+            <!-- Include the sidebar component -->
+            {{-- <x-sidebar /> --}}
 
-        <!-- Main content -->
-        <div class="flex-1 p-6">
-            <h1 class="text-2xl font-bold mb-4">Edit Customer</h1>
-            <form method="post" action="{{ route('customer.update', ['customer' => $customer]) }}" class="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto space-y-4">
-                @csrf <!-- Include CSRF token for security -->
-                @method('put')
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">First Name</label>
-                    <input type="text" name="first_name" placeholder="First Name" value="{{ $customer->first_name }}"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Last Name</label>
-                    <input type="text" name="last_name" placeholder="Last Name" value="{{ $customer->last_name }}"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Phone Number</label>
-                    <input type="text" name="phone_number" placeholder="Phone Number"
-                        value="{{ $customer->phone_number }}"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" name="email" placeholder="Email"
-                        value="{{ $customer->email }}"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <input type="hidden" name="users_id" placeholder="Users ID" value="{{ auth()->id() }}"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-                <div>
-                    <input type="submit" value="Update Customer"
-                        class="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                </div>
-            </form>
+            <!-- Main content -->
+            <div class="flex-grow-1 p-4">
+                <h1 class="h4 font-weight-bold mb-4">Edit Customer</h1>
+                <form method="post" action="{{ route('customer.update', ['customer' => $customer]) }}" class="bg-white p-4 rounded shadow-sm max-w-md mx-auto">
+                    @csrf <!-- Include CSRF token for security -->
+                    @method('put')
+
+                    <div class="mb-3">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" id="first_name" name="first_name" placeholder="First Name" value="{{ $customer->first_name }}"
+                            class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" placeholder="Last Name" value="{{ $customer->last_name }}"
+                            class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone_number" class="form-label">Phone Number</label>
+                        <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number" value="{{ $customer->phone_number }}"
+                            class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Email" value="{{ $customer->email }}"
+                            class="form-control" required>
+                    </div>
+
+                    <input type="hidden" name="users_id" value="{{ auth()->id() }}">
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary w-100">Update Customer</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
     @endsection
-{{-- </x-app-layout> --}}
+    {{-- </x-app-layout> --}}
